@@ -1,16 +1,10 @@
 export default function SignUp(){
     return(
         <form className="signUp">
-
-            <label for="userName">userName</label>
+            <h2>Sign Up</h2>
             <input type="text" placeholder="userName" />
-
-            <label for="password">Password</label>
             <input type="password" placeholder="Password" />  
-
-            <label for="checkPassword">Re Enter Password</label>
-            <input type="password" placeholder="Check Password" />
-
+            <input type="password" placeholder="Re Enter Password" />
             <button type="submit" className="formBtn">sign Up</button>
             
         </form>
