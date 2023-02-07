@@ -1,10 +1,21 @@
+import { useState } from "react";
+
 export default function SignUp(){
+    const[username,setUsername]=useState('');
+    const[password,setPassword]=useState('');
+    async function register(ev){
+        ev.preventDefault();
+        await fetch("http://localhost:4000/register",{
+            method: 'POST',
+            body:JSON.stringify({username,password}),
+            headers:{'content-Type':'application/json'},
+        })
+    }
     return(
-        <form className="signUp">
+        <form className="signUp" onSubmit={register}>
             <h2>Sign Up</h2>
-            <input type="text" placeholder="userName" />
-            <input type="password" placeholder="Password" />  
-            <input type="password" placeholder="Re Enter Password" />
+            <input type="text" placeholder="userName" value={username}onChange={ev =>setUsername(ev.target.value)} />
+            <input type="password" placeholder="Password" value={password}onChange={ev=>setPassword(ev.target.value)} />  
             <button type="submit" className="formBtn">sign Up</button>
             
         </form>
