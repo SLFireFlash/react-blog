@@ -7,7 +7,7 @@ img{
 }
 main{
   padding: 10px;
-  max-width: 600px;
+  max-width: 700px;
   margin: 0 auto;
 }
 header{
@@ -60,4 +60,36 @@ div.post p.info a.author{
 
 div.post p.summary{
   margin: 10px 0;
+}
+
+form.login , form.signUp{
+  max-width: 500px;
+  line-height: 1.4rem;
+}
+input{
+
+  display: block;
+  margin-bottom: 5px;
+  width: 100%;
+  padding: 5px;
+  background-color: #eee;
+  border-bottom: 3px solid #555;
+}
+button.formBtn{
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  background-color: white; 
+  color: black; 
+  border: 2px solid #4CAF50;
+
+}
+button.formBtn:hover{
+  background-color: #4CAF50;
+  color: white;
+
 }
