@@ -12,5 +12,3 @@ app.post('/signUp',(req,res)=>{
 
 
 app.listen(4000);
-//mongodb+srv://Flash:<OWmjGDi8Kw4qTWtC>@cluster0.883qedm.mongodb.net/?retryWrites=true&w=majority
-// OWmjGDi8Kw4qTWtC
