@@ -5,12 +5,19 @@ export default function SignUp(){
     const[password,setPassword]=useState('');
     async function register(ev){
         ev.preventDefault();
-        await fetch("http://localhost:4000/register",{
+        await fetch("http://localhost:4000/signUp",{
             method: 'POST',
             body:JSON.stringify({username,password}),
-            headers:{'content-Type':'application/json'},
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type':'application/json',
+            },
+        })
+        .then(()=>{
+            alert('You have been added to the system!');
         })
     }
+
     return(
         <form className="signUp" onSubmit={register}>
             <h2>Sign Up</h2>

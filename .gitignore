@@ -8,11 +8,13 @@
 # testing
 /coverage
 
+#own
+api/
+
 # production
 /build
 
 # misc
-dbSec.env
 .DS_Store
 .env.local
 .env.development.local
