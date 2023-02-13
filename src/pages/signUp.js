@@ -3,19 +3,19 @@ import { useState } from "react";
 export default function SignUp(){
     const[username,setUsername]=useState('');
     const[password,setPassword]=useState('');
+
     async function register(ev){
         ev.preventDefault();
-        await fetch("http://localhost:4000/signUp",{
-            method: 'POST',
-            body:JSON.stringify({username,password}),
-            headers:{
-                'Accept': 'application/json',
-                'Content-Type':'application/json',
-            },
-        })
-        .then(()=>{
-            alert('You have been added to the system!');
-        })
+            await fetch("http://localhost:4000/signUpDb",{
+                method: 'POST',
+                body:JSON.stringify({username,password}),
+                headers:{
+                    'Accept': 'application/json',
+                    'Content-Type':'application/json',
+                },
+            })
+
+
     }
 
     return(
