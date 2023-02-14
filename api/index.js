@@ -4,13 +4,15 @@ const { default: mongoose } = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwk = require("jsonwebtoken");
 const dotenv = require('dotenv');
+const cookieParser = require('cookie-parser');
 const user = require('./models/user');
 
 dotenv.config();
 const app = express();
 
-app.use(cors());
+app.use(cors({credentials:true,origin:"http://localhost:3000"}));
 app.use(express.json());
+app.use(cookieParser())
 const databaseUrl = process.env.DATABASE_URL;
 mongoose.connect(databaseUrl);
 
@@ -31,19 +33,31 @@ app.post("/signUpDb", async(req,res) =>{
 app.post("/loginDb",async(req,res)=>{
     const{username,password}=req.body;
     const userDoc = await user.findOne({username})
-    const passSt = bcrypt.compareSync(password,userDoc.password);
-    if(passSt == true){
-        //login
-        jwk.sign({username,id:userDoc._id},Pkey,{},(err,token)=>{
-            if(err)throw err;
-            res.json(token);
-        });
+    if(userDoc.password != null){
+        const passSt = bcrypt.compareSync(password,userDoc.password);
+        if(passSt == true){
+            //login
+            jwk.sign({username,id:userDoc._id},Pkey,{},(err,token)=>{
+                if(err)throw err;
+                res.cookie('token',token).json("login complete");
+            });
+        }
+        else{
+            console.log("something went wrong try again")
+            
+        }
     }
     else{
-        console.log("something went wrong try again")
+        console.log("user name not found")
+        
     }
 
+
 })
+// // app.get("/proC",(res,req) =>{
+// //     res.json("req.cookie")
+
+// });
 
 
 app.listen(4000);
