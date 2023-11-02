@@ -8,9 +8,6 @@
 # testing
 /coverage
 
-#own
-api/
-
 # production
 /build
 
