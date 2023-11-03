@@ -6,6 +6,7 @@
 }
 body{
   color: #333;
+  /* background-color: #07BBE0; */
 }
 img{
   max-width: 100%;
@@ -53,3 +54,28 @@ p.post-info a.author{
   color: inherit;
 }
 
+/*login page*/
+.formdiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+}
+.mainformdiv{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.formdiv input,button{
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: #82ee94;
+  transition: background-color 0.5s, color 0.5s;
+}
+.formdiv button:hover{
+  background-color:#07E0BF;
+}
