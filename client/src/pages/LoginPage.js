@@ -1,10 +1,13 @@
-import {useState} from 'react';
+import {useContext, useState} from 'react';
 import { Navigate } from 'react-router-dom';
+import { UserContext } from '../UserContext';
 
 function Loginpage(){
     const[username,getuserName] = useState('');
     const[password,getPasswrod] =useState('');
     const [redirect, setRedirect] = useState(false);
+    const{setUserInfo}=useContext(UserContext);
+
     
 
     async function login(ev){
@@ -15,16 +18,17 @@ function Loginpage(){
             headers:{'content-Type':'application/json'},
             credentials:'include',
         });
-    
-        if(response ==='ok'){
-            setRedirect(true);
-        }
-        console.log(redirect);
-        if(redirect){
-            return(<Navigate to={'/'}/> )
+        if(response.ok){
+            response.json().then(userinfo=>{
+                setUserInfo(userinfo);
+                setRedirect(true);
+            })
+            
         }
     }
-
+    if(redirect){
+        return(<Navigate to={'/'}/> )
+    }
     return(
         <div className="formdiv">
             <form onSubmit={login} className="mainformdiv">
