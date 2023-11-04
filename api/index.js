@@ -20,7 +20,7 @@ app.use(cors({credentials:true,origin:'http://localhost:3000'}));
 app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads',express.static(__dirname+'/uploads'));
-mongoose.connect("mongodb+srv://LahiruPrasanna:OasrH7J70Xj3rqLL@cluster0.rlxpino.mongodb.net/?retryWrites=true&w=majority");
+mongoose.connect(process.env.MONGODB_URI);
 
 app.post('/register',async(req,res)=>{
     const {username,password} =req.body;
