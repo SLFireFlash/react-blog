@@ -6,7 +6,8 @@ import Indexpage from "./pages/IndexPage";
 import Loginpage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import { UserContextProvider } from "./UserContext";
-
+import NewPost from "./pages/NewPost";
+import FullPost from'./pages/FullPost';
 function App() {
 
   return (
@@ -17,9 +18,9 @@ function App() {
             <Route index element={<Indexpage/>} />
             <Route path="/login" element={<Loginpage />} />
             <Route path="/register" element={<RegisterPage />} />
-            <Route path="/PostData" element={<div>full post</div> }/>
+            <Route path="/post/:id" element={<FullPost />}/>
             <Route path="/Logout" element={<Indexpage/>} />
-            <Route path="/newPost" element={<>new post</>} />
+            <Route path="/newPost" element={<NewPost />} />
           </Route>
         </Routes>
       </UserContextProvider>

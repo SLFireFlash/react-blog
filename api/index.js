@@ -1,22 +1,25 @@
+require('dotenv').config();
 const express = require("express");
 const cors = require('cors');
 const {mongoose} = require("mongoose");
 const User =require('./models/user');
+const Post = require('./models/post');
 const jwk =require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const cookieParser = require('cookie-parser');
 const salt = bcrypt.genSaltSync(10);
 const secTk ='hurasda129das4da4nsd123'
-require('dotenv').config();
+const multer = require('multer');
+const fs = require ('fs');
 
 
-
+const uploadMid=multer({dest:'uploads/'});
 
 const app = express();
 app.use(cors({credentials:true,origin:'http://localhost:3000'}));
 app.use(express.json());
 app.use(cookieParser());
-
+app.use('/uploads',express.static(__dirname+'/uploads'));
 mongoose.connect(process.env.DBLink);
 
 app.post('/register',async(req,res)=>{
@@ -69,7 +72,46 @@ app.post('/logout',(req,res)=>{
 
 })
 
+function setupFilePath(req){
+    const {originalname,path} =req.file;
+    const parts = originalname.split('.')
+    const exnt = parts[parts.length-1];
+    const newPath= path+'.'+exnt;
+    fs.renameSync(path,newPath)
+    return newPath;
+}
+app.post('/newpost',uploadMid.single('file'),async(req,res)=>{
+    const newpath = setupFilePath(req)
+    const{title,summary,content}=req.body;
 
+    const{token}= req.cookies;
+    jwk.verify(token,secTk,{},async(err,info)=>{
+        if(err)throw err;
+        const PostDoc = await Post.create({
+            title,
+            summary,
+            content,
+            cover:newpath,
+            author:info.id
+        })
+        res.json(PostDoc);
+    });
+});
+
+app.get('/post',async(req,res)=>{
+    res.json(
+        await Post.find()
+          .populate('author', ['username'])
+          .sort({createdAt: -1})
+          .limit(20)
+      );
+})
+
+app.get('/post/:id', async (req, res) => {
+    const {id} = req.params;
+    const postDoc = await Post.findById(id).populate('author', ['username']);
+    res.json(postDoc);
+  })
 app.listen(4000);
 
 

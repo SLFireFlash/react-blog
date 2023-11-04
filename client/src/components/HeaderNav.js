@@ -26,10 +26,11 @@ function HeaderNav(){
   const username = userInfo?.username;
     return(
         <header>
-        <Link to="/" className='logo'>Mix Cafe</Link>
+        <Link to="/" className='logo'>Mix Cafe</Link>       
         <nav>
           {username &&(
             <>
+              <a>Hi {userInfo.username}</a>
               <Link to='/newPost'>Post</Link>
               <a onClick={logout}>Logout</a>
             </>

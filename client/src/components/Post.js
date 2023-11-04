@@ -1,21 +1,22 @@
 import { Link } from "react-router-dom";
+import ReactTimeAgo from 'react-time-ago'
 
-
-
-function Post(){
+function Post({_id,title,cover,content,createdAt,author}){
     
     
     
     return(
         <div className='post'>
         <div className="post-img">
-          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhaQJphkehZ8fr6r1wLLrCyzSKt-kjysRvXF8g04M_7gBaKZcbWe9NL6pIdXmLa5cc2qDI0Yo1hFzuQF8VIwZiE8XKifGEZBcXpR1BJFbVcWBrAaggoad3Q44U9IAkcVpnDIHSeA0v2xzvl85mUJl3-2auWKlaaVHdnyft3Qqbdcy1xv7neBYnKyObjX58/w400-h248/jackffffffffffff.png" alt="post_image" />
+          <Link to={`/post/${_id}`}>
+            <img src={'http://localhost:4000/'+cover} alt="post_image" />
+          </Link>
         </div>
         <div className="post-text">
-          <Link to="/PostData" ><h2>ජැක්සන් ඇන්තනි මහතා</h2></Link>
+          <Link to={`/post/${_id}`} ><h2>{title}</h2></Link>
           <p className='post-info'>
-            <a href="#" className="author">Lahiru</a>
-            <time>2023-10-05 10:43 AM</time>
+            <a href="#" className="author">{author.username}</a>
+            <time><ReactTimeAgo date={createdAt} locale="en-US"/></time>
           </p>
         </div>
       </div>
