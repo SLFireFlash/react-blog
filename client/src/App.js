@@ -8,6 +8,7 @@ import RegisterPage from "./pages/RegisterPage";
 import { UserContextProvider } from "./UserContext";
 import NewPost from "./pages/NewPost";
 import FullPost from'./pages/FullPost';
+import EditPost from "./pages/EditPost";
 function App() {
 
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/post/:id" element={<FullPost />}/>
             <Route path="/Logout" element={<Indexpage/>} />
             <Route path="/newPost" element={<NewPost />} />
+            <Route path="/edit/:id" element={<EditPost />}/>
           </Route>
         </Routes>
       </UserContextProvider>
