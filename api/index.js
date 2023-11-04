@@ -20,7 +20,7 @@ app.use(cors({credentials:true,origin:'http://localhost:3000'}));
 app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads',express.static(__dirname+'/uploads'));
-mongoose.connect(process.env.DBLink);
+mongoose.connect(process.env.MONGODB_URI);
 
 app.post('/register',async(req,res)=>{
     const {username,password} =req.body;
@@ -143,7 +143,7 @@ app.get('/post/:id', async (req, res) => {
     const postDoc = await Post.findById(id).populate('author', ['username']);
     res.json(postDoc);
   })
-app.listen(4000);
+app.listen(process.env.PORT);
 
 
 
